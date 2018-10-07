@@ -53,7 +53,7 @@ The other tags are more useful in the `<body>` section.
 
 ## Hide the uglies in HTML preview
 
-Unknown tags shouldn't get rendered. Therefore there is nothing to be done for
+Unknown tags shouldn't get rendered by the browser. Therefore there is nothing to do for
 most tags. The text between `<objc>` and `</objc>` can be hidden with CSS:
 
 ```
