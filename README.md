@@ -6,6 +6,8 @@ Write your [MulleScion](/mulle-kybernetik/MulleScion) template code in HTML
 lookalike tags. Now reformat the HTML document and it doesn't destroy your
 template code (as much).
 
+> Check the [Wiki](mulle-nat/MulleScionHTMLPreprocessor/wiki) for editor setup help.
+
 
 ## Tags
 
