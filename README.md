@@ -36,8 +36,6 @@ Tag         | Translates to
 
 ## Example
 
- Example:
- 
  ```
  <html>
   <head>
