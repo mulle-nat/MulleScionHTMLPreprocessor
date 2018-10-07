@@ -64,5 +64,5 @@ most tags. The text between `<objc>` and `</objc>` can be hidden with CSS:
 
 ## Usage
 
-Instantiate and install it with `-[MulleScionParser setPreprocessor:]`. Now you can call `-[MulleScionParser template]` to get the pre-processed and parsed template.
+Instantiate `[[MulleScionHTMLPreprocessor new] autorelease]` and install it with `-[MulleScionParser setPreprocessor:]`. Now you can call `-[MulleScionParser template]` to get the pre-processed and parsed template.
 
