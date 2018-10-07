@@ -66,5 +66,7 @@ most tags. The text between `<objc>` and `</objc>` can be hidden with CSS:
 
 ## Usage
 
+> Preprocessor support is available starting with MulleScion version 1859.
+
 Instantiate `[[MulleScionHTMLPreprocessor new] autorelease]` and install it with `-[MulleScionParser setPreprocessor:]`. Now you can call `-[MulleScionParser template]` to get the pre-processed and parsed template.
 
