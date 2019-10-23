@@ -1,6 +1,6 @@
 # MulleScionHTMLPreprocessor
 
-🥣 A Preprocessor for HTML that converts &lt;objc> and other tags to MulleScion {% %}
+🥣 A Preprocessor for HTML that converts `<objc>` and other tags to MulleScion `{%` `%}`
 
 Write your [MulleScion](/mulle-kybernetik/MulleScion) template code in HTML
 lookalike tags. Now reformat the HTML document and it doesn't destroy your
