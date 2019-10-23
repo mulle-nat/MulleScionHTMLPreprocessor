@@ -6,7 +6,7 @@ if( NOT __EXECUTABLE_OBJC_CMAKE__)
    endif()
 
    if( NOT EXECUTABLE_NAME)
-      set( EXECUTABLE_NAME "MulleScionHTMLPreprocessor")
+      set( EXECUTABLE_NAME "${PROJECT_NAME}")
    endif()
 
    #
@@ -16,6 +16,16 @@ if( NOT __EXECUTABLE_OBJC_CMAKE__)
       PROPERTIES LINKER_LANGUAGE C
    )
 
-   include( ExecutableObjCAux OPTIONAL)
+   #
+   # only for mulle-clang
+   #
+   if( APPLE AND MULLE_OBJC)
+      target_link_options( "${EXECUTABLE_NAME}"
+         PUBLIC
+            "SHELL:LINKER:-exported_symbol,___register_mulle_objc_universe"
+      )
+   endif()
+
+   include( ExecutableAuxObjC OPTIONAL)
 
 endif()

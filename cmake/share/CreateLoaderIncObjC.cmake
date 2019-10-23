@@ -12,7 +12,7 @@ endif()
 
 if( CREATE_OBJC_LOADER_INC)
    if( NOT LIBRARY_NAME)
-      set( LIBRARY_NAME "MulleScionHTMLPreprocessor")
+      set( LIBRARY_NAME "${PROJECT_NAME}")
    endif()
 
    #
@@ -59,8 +59,6 @@ if( CREATE_OBJC_LOADER_INC)
    # In the end OBJC_LOADER_INC will be generated, which will be
    # included by the Loader.
    #
-   # This cmake should also output just a OBJC_LOADER_INC file and nothing
-   # else, if  "_2_${LIBRARY_NAME}" is not defined (and there fore it's
    if( TARGET "_2_${LIBRARY_NAME}")
       add_library( "_3_${LIBRARY_NAME}" STATIC
          $<TARGET_OBJECTS:_1_${LIBRARY_NAME}>
@@ -81,7 +79,6 @@ if( CREATE_OBJC_LOADER_INC)
    add_custom_command(
       OUTPUT ${OBJC_LOADER_INC}
       COMMAND ${MULLE_OBJC_LOADER_TOOL}
-                 -v
                  $ENV{MULLE_OBJC_LOADER_TOOL_FLAGS}
                  -c "${CMAKE_BUILD_TYPE}"
                  -o "${OBJC_LOADER_INC}"
@@ -103,6 +100,13 @@ if( CREATE_OBJC_LOADER_INC)
       add_dependencies( "${LIBRARY_NAME}" __objc_loader_inc__)
    endif()
 
+   #
+   # tricky: this file can only be installed during link phase.
+   #         It's installation is somewhat gratuitous now.
+   #
+   if( LINK_PHASE)
+      install( FILES "${OBJC_LOADER_INC}" DESTINATION "include/${LIBRARY_NAME}/private")
+   endif()
 endif()
 
-include( CreateLoaderIncObjCAux OPTIONAL)
+include( CreateLoaderIncAuxObjC OPTIONAL)

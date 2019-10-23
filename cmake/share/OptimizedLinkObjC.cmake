@@ -8,12 +8,14 @@ if( NOT __OPTIMIZED_LINK_OBJC_CMAKE__)
    #
    # can only be used in one-library/project cmake project
    #
-   option( OBJC_COVERAGE_OPTIMIZED_LIBS "Create coverage-optimized ObjC libraries" OFF)
+   if( NOT DEFINED OBJC_COVERAGE_OPTIMIZED_LIBS)
+      option( OBJC_COVERAGE_OPTIMIZED_LIBS "Create coverage-optimized ObjC libraries" OFF)
+   endif()
 
    if( OBJC_COVERAGE_OPTIMIZED_LIBS)
 
       if( NOT LIBRARY_NAME)
-         set( LIBRARY_NAME "MulleScionHTMLPreprocessor")
+         set( LIBRARY_NAME "${PROJECT_NAME}")
       endif()
 
       #
@@ -115,6 +117,6 @@ if( NOT __OPTIMIZED_LINK_OBJC_CMAKE__)
       add_dependencies( ${LIBRARY_NAME} "_${LIBRARY_NAME}_optimized_libraries")
    endif()
 
-   include( OptimizedLinkObjCAux OPTIONAL)
+   include( OptimizedLinkAuxObjC OPTIONAL)
 
 endif()
