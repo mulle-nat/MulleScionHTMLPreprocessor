@@ -1,2 +1,0 @@
-Foundation;tar;no-os-darwin;F0728FAF-8FB8-44B9-B57D-A674AF7D108E;${FOUNDATION_URL:-https://github.com/MulleFoundation/Foundation/archive/${FOUNDATION_BRANCH:-latest}.tar.gz};;;;
-mulle-buffer;tar;no-all-load,no-import;65524FBE-5A0B-435A-A705-C0F5DD535D9E;${MULLE_BUFFER_URL:-https://github.com/mulle-c/mulle-buffer/archive/${MULLE_BUFFER_BRANCH:-latest}.tar.gz};;;;
