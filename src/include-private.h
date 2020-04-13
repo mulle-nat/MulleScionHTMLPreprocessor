@@ -1,5 +1,5 @@
-#ifndef mulle_scionh_tmlpreprocessor_include_private_h__
-#define mulle_scionh_tmlpreprocessor_include_private_h__
+#ifndef mulle_scionhtmlpreprocessor_include_private_h__
+#define mulle_scionhtmlpreprocessor_include_private_h__
 
 
 /* DO:    #include this files in sources
@@ -24,5 +24,6 @@
 #include "_MulleScionHTMLPreprocessor-include-private.h"
 
 /* You can add some more include statements here */
+
 
 #endif

@@ -1,5 +1,5 @@
-#ifndef mulle_scionh_tmlpreprocessor_include_h__
-#define mulle_scionh_tmlpreprocessor_include_h__
+#ifndef mulle_scionhtmlpreprocessor_include_h__
+#define mulle_scionhtmlpreprocessor_include_h__
 
 /* DO:    #include this files in public headers.
 
@@ -30,5 +30,8 @@
 #include "_MulleScionHTMLPreprocessor-include.h"
 
 /* You can add some more include statements here */
+
+/* should have been included my MulleObjCValueFoundation */
+#include <mulle-buffer/mulle-buffer.h>
 
 #endif

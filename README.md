@@ -2,11 +2,11 @@
 
 🥣 A Preprocessor for HTML that converts `<objc>` and other tags to MulleScion `{%` `%}`
 
-Write your [MulleScion](/mulle-kybernetik/MulleScion) template code in HTML
+Write your [MulleScion](//github.com/MulleWeb/MulleScion) template code in HTML
 lookalike tags. Now reformat the HTML document and it doesn't destroy your
 template code (as much).
 
-> Check the [Wiki](mulle-nat/MulleScionHTMLPreprocessor/wiki) for editor setup help.
+> Check the [Wiki](//github.com/MulleWeb/MulleScionHTMLPreprocessor/wiki) for editor setup help.
 
 
 ## Tags
@@ -68,5 +68,34 @@ most tags. The text between `<objc>` and `</objc>` can be hidden with CSS:
 
 > Preprocessor support is available starting with MulleScion version 1859.
 
-Instantiate `[[MulleScionHTMLPreprocessor new] autorelease]` and install it with `-[MulleScionParser setPreprocessor:]`. Now you can call `-[MulleScionParser template]` to get the pre-processed and parsed template.
+```
+MulleScionParser *parser;
 
+...
+[parser setPreprocessor:[MulleScionHTMLPreprocessor object]];
+```
+
+
+## Add
+
+Use [mulle-sde](//github.com/mulle-sde) to add MulleScionHTMLPreprocessor to your project:
+
+```
+mulle-sde dependency add --objc --github MulleWeb MulleScionHTMLPreprocessor
+```
+
+## Install
+
+Use [mulle-sde](//github.com/mulle-sde) to build and install MulleScionHTMLPreprocessor and
+all its dependencies:
+
+```
+mulle-sde install --objc --prefix /usr/local \
+   https://github.com/MulleWeb/MulleScionHTMLPreprocessor/archive/latest.tar.gz
+```
+
+## Author
+
+[Nat!](//www.mulle-kybernetik.com/weblog) for
+[Mulle kybernetiK](//www.mulle-kybernetik.com) and
+[Codeon GmbH](//www.codeon.de)

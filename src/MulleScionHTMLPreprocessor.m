@@ -5,15 +5,19 @@
 //  Created by Nat! on 07.10.18.
 //  Copyright © 2018 Mulle kybernetiK. All rights reserved.
 //
+#define _DEFAULT_SOURCE  // use for strcasecmp on linux
 
 #import "MulleScionHTMLPreprocessor.h"
 
-@implementation MulleScionHTMLPreprocessor
-
+#import "import-private.h"
 #include <stdio.h>
 #include <ctype.h>
 #include <unistd.h>
-#include <mulle-buffer/mulle-buffer.h>
+#include <string.h>
+
+
+@implementation MulleScionHTMLPreprocessor
+
 
 
 //
@@ -38,7 +42,8 @@ enum parser_state
    expect_comment_closer2,
 };
 
-static int   preprocess( struct _mulle_buffer *in, struct mulle_buffer *out)
+
+static int   preprocess( struct mulle__buffer*in, struct mulle_buffer *out)
 {
    unsigned int        c;
    enum parser_state   state;
@@ -61,7 +66,7 @@ static int   preprocess( struct _mulle_buffer *in, struct mulle_buffer *out)
    content_end           = (size_t) -1;
    identifier_first_char = 0;
 
-   file_start = _mulle_buffer_get_seek( in);
+   file_start = _mulle__buffer_get_seek( in);
    state      = expect_open;
 
    /*
@@ -92,30 +97,30 @@ static int   preprocess( struct _mulle_buffer *in, struct mulle_buffer *out)
     *
     */
 
-   while( (c = _mulle_buffer_next_byte( in)) != -1)
+   while( (c = _mulle__buffer_next_byte( in)) != -1)
    {
       switch( state)
       {
       case expect_open :
          if( c != '<')
          {
-            if( _mulle_buffer_find_byte( in, '<') == -1)
+            if( _mulle__buffer_find_byte( in, '<') == -1)
                goto done;
 
-            c = _mulle_buffer_next_byte( in);
+            c = _mulle__buffer_next_byte( in);
             assert( c == '<');
          }
          state             = open_found;
          backslash         = 0;
          identifier_start  = (size_t) -1;
-         tag_start         = _mulle_buffer_get_seek( in) - 1;
+         tag_start         = _mulle__buffer_get_seek( in) - 1;
          continue;
 
       case open_found :
          if( (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c == '_')
          {
             identifier_first_char = c;
-            identifier_start      = _mulle_buffer_get_seek( in) - 1;
+            identifier_start      = _mulle__buffer_get_seek( in) - 1;
             state                 = identifier_found;
             continue;
          }
@@ -140,7 +145,7 @@ static int   preprocess( struct _mulle_buffer *in, struct mulle_buffer *out)
          if( (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9') || c == '_')
             continue;
 
-         identifier_end = _mulle_buffer_get_seek( in);
+         identifier_end = _mulle__buffer_get_seek( in);
          content_end    = (size_t) -1;
          state          = expect_closer;
          // fall through
@@ -149,7 +154,7 @@ static int   preprocess( struct _mulle_buffer *in, struct mulle_buffer *out)
          // snarf up stuff until '/' or '>'
          if( c == '/')
          {
-            content_end = _mulle_buffer_get_seek( in) - 1;
+            content_end = _mulle__buffer_get_seek( in) - 1;
             state       = expect_closer2;
             continue;
          }
@@ -164,7 +169,7 @@ static int   preprocess( struct _mulle_buffer *in, struct mulle_buffer *out)
             {
                if( c == '/')
                {
-                  content_end = _mulle_buffer_get_seek( in) - 1;
+                  content_end = _mulle__buffer_get_seek( in) - 1;
                   backslash  |= 2;
                }
                else
@@ -185,7 +190,7 @@ static int   preprocess( struct _mulle_buffer *in, struct mulle_buffer *out)
          }
 
          if( content_end == (size_t) -1)
-            content_end = _mulle_buffer_get_seek( in) - 1;
+            content_end = _mulle__buffer_get_seek( in) - 1;
          break;
 
       // comment handling
@@ -253,10 +258,10 @@ static int   preprocess( struct _mulle_buffer *in, struct mulle_buffer *out)
          continue;
       }
 
-      tag_end = _mulle_buffer_get_seek( in);
-      _mulle_buffer_set_seek( in, MULLE_BUFFER_SEEK_SET, identifier_start);
-      _mulle_buffer_next_bytes( in, tmp, len);
-      _mulle_buffer_set_seek( in, MULLE_BUFFER_SEEK_SET, tag_end);
+      tag_end = _mulle__buffer_get_seek( in);
+      _mulle__buffer_set_seek( in, MULLE_BUFFER_SEEK_SET, identifier_start);
+      _mulle__buffer_next_bytes( in, tmp, len);
+      _mulle__buffer_set_seek( in, MULLE_BUFFER_SEEK_SET, tag_end);
       tmp[ len] = 0;
 
       if( strcasecmp( tmp, "block") &&
@@ -306,7 +311,7 @@ done:
    if( mulle_buffer_get_length( out) == 0)
       return( 0);
 
-   file_end = _mulle_buffer_get_seek( in);
+   file_end = _mulle__buffer_get_seek( in);
    mulle_buffer_add_buffer_range( out, in, file_start, file_end - file_start);
    return( 1);
 }
@@ -314,10 +319,10 @@ done:
 
 - (NSData *) preprocessedData:(NSData *) data
 {
-   struct _mulle_buffer  in;
+   struct mulle__buffer  in;
    struct mulle_buffer   out;
 
-   _mulle_buffer_init_with_static_bytes( &in, (void *) [data bytes], [data length]);
+   _mulle__buffer_init_with_static_bytes( &in, (void *) [data bytes], [data length]);
    mulle_buffer_init( &out, &mulle_default_allocator);
 
    if( preprocess( &in, &out))
@@ -325,7 +330,7 @@ done:
                             length:mulle_buffer_get_length( &out)];
 
    // not needed as its static
-   //    _mulle_buffer_done( &in, NULL);
+   //    _mulle__buffer_done( &in, NULL);
    mulle_buffer_done( &out);
 
    return( data);
