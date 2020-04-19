@@ -11,7 +11,6 @@ src/reflect
 )
 
 set( PRIVATE_GENERATED_HEADERS
-src/_MulleScionHTMLPreprocessor-include-private.h
 src/reflect/_MulleScionHTMLPreprocessor-import-private.h
 )
 
@@ -21,7 +20,6 @@ src/include-private.h
 )
 
 set( PUBLIC_GENERATED_HEADERS
-src/_MulleScionHTMLPreprocessor-include.h
 src/reflect/_MulleScionHTMLPreprocessor-import.h
 )
 
