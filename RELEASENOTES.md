@@ -1,3 +1,7 @@
+### 0.2.1
+
+* new mulle-sde project structure
+
 ## 0.2.0
 
 * moved to MulleWeb and added a little leak test

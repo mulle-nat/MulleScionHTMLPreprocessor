@@ -31,7 +31,7 @@ if( STANDALONE)
    endif()
 
    if( NOT STANDALONE_DEFINITIONS)
-      set( STANDALONE_DEFINITIONS ${mulle_scion_html_preprocessor_DEFINITIONS})
+      set( STANDALONE_DEFINITIONS ${MULLE_SCION_HTML_PREPROCESSOR_DEFINITIONS})
    endif()
 
    #
