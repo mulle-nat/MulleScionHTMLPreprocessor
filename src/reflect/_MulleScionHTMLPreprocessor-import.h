@@ -13,12 +13,17 @@
 #define _MulleScionHTMLPreprocessor_import_h__
 
 // How to tweak the following MulleObjCValueFoundation #import
-//    remove:          `mulle-sourcetree mark MulleObjCValueFoundation no-header`
-//    rename:          `mulle-sourcetree mark MulleObjCValueFoundation set include whatever.h`
-//    toggle #import:  `mulle-sourcetree mark MulleObjCValueFoundation [no-]import`
-//    toggle public:   `mulle-sourcetree mark MulleObjCValueFoundation [no-]public`
-//    toggle optional: `mulle-sourcetree mark MulleObjCValueFoundation [no-]require`
-//    remove for os:   `mulle-sourcetree mark MulleObjCValueFoundation no-os-<osname>`
-# import <MulleObjCValueFoundation/MulleObjCValueFoundation.h>   // MulleObjCValueFoundation
+//    remove:             `mulle-sourcetree mark MulleObjCValueFoundation no-header`
+//    rename:             `mulle-sde dependency|library set MulleObjCValueFoundation include whatever.h`
+//    toggle #import:     `mulle-sourcetree mark MulleObjCValueFoundation [no-]import`
+//    toggle localheader: `mulle-sourcetree mark MulleObjCValueFoundation [no-]localheader`
+//    toggle public:      `mulle-sourcetree mark MulleObjCValueFoundation [no-]public`
+//    toggle optional:    `mulle-sourcetree mark MulleObjCValueFoundation [no-]require`
+//    remove for os:      `mulle-sourcetree mark MulleObjCValueFoundation no-os-<osname>`
+# if defined( __has_include) && __has_include("MulleObjCValueFoundation.h")
+#   import "MulleObjCValueFoundation.h"   // MulleObjCValueFoundation
+# else
+#   import <MulleObjCValueFoundation/MulleObjCValueFoundation.h>   // MulleObjCValueFoundation
+# endif
 
 #endif

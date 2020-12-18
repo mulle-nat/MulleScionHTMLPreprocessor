@@ -30,7 +30,7 @@ export PREFERRED_STARTUP_LIBRARY="Foundation-startup"
 
 #
 # noob it up a little, to only have ObjC headers for
-# Foundation as the default
+# Foundation as the default.
 #
 export MULLE_SOURCETREE_TO_C_INCLUDE_FILE="DISABLE"
 
