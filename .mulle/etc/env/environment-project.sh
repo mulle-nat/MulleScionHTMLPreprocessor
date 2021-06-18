@@ -7,19 +7,19 @@ export PROJECT_NAME="MulleScionHTMLPreprocessor"
 #
 #
 #
-export PROJECT_IDENTIFIER="MulleScionHTMLPreprocessor"
 
-
-#
-#
-#
-export PROJECT_DOWNCASE_IDENTIFIER="mulle_scion_html_preprocessor"
 
 
 #
 #
 #
-export PROJECT_UPCASE_IDENTIFIER="MULLE_SCION_HTML_PREPROCESSOR"
+
+
+
+#
+#
+#
+
 
 
 #
