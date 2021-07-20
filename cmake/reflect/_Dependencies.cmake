@@ -15,7 +15,7 @@ endif()
 #
 # Generated from sourcetree: 95f552a4-4250-4d9c-86f4-44be85221c55;MulleObjCValueFoundation;no-singlephase;
 # Disable with : `mulle-sourcetree mark MulleObjCValueFoundation no-link`
-# Disable for this platform: `mulle-sourcetree mark MulleObjCValueFoundation no-cmake-platform-linux`
+# Disable for this platform: `mulle-sourcetree mark MulleObjCValueFoundation no-cmake-platform-darwin`
 #
 if( NOT MULLE_OBJC_VALUE_FOUNDATION_LIBRARY)
    find_library( MULLE_OBJC_VALUE_FOUNDATION_LIBRARY NAMES ${CMAKE_STATIC_LIBRARY_PREFIX}MulleObjCValueFoundation${CMAKE_STATIC_LIBRARY_SUFFIX} MulleObjCValueFoundation NO_CMAKE_SYSTEM_PATH NO_SYSTEM_ENVIRONMENT_PATH)
